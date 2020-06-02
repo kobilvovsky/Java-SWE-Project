@@ -15,7 +15,6 @@ public class Maintenance
     {
         return yearlyCost;
     }
-
     public void setYearlyCost(int yearlyCost)
     {
         this.yearlyCost = yearlyCost;
@@ -25,7 +24,6 @@ public class Maintenance
     {
         return fuelConsumption;
     }
-
     public void setFuelConsumption(int fuelConsumption)
     {
         this.fuelConsumption = fuelConsumption;

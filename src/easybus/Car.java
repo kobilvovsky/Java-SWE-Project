@@ -48,4 +48,8 @@ public class Car extends Maintenance
     public int getPosY() { return posY; }
     public void setPosX(int posX) { this.posX = posX; }
     public void setPosY(int posY) { this.posY = posY; }
+
+    public void print() {
+        System.out.println("["+ getLicenseNum() + "]: " + getModel() + "/" + getYear());
+    }
 }

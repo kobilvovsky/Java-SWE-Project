@@ -6,9 +6,9 @@ public class Busdriver extends Person
     int salary;
     int warnings;
 
-    public Busdriver(String name, String sex, int age, int yearExp, int salary, int warnings)
+    public Busdriver(String name, int id, String sex, int age, int yearExp, int salary, int warnings)
     {
-        super(name, sex, age);
+        super(id, name, sex, age);
         this.yearExp = yearExp;
         this.salary = salary;
         this.warnings = warnings;
@@ -18,7 +18,6 @@ public class Busdriver extends Person
     {
         return yearExp;
     }
-
     public void setYearExp(int yearExp)
     {
         this.yearExp = yearExp;
@@ -28,7 +27,6 @@ public class Busdriver extends Person
     {
         return salary;
     }
-
     public void setSalary(int salary)
     {
         this.salary = salary;
@@ -38,7 +36,6 @@ public class Busdriver extends Person
     {
         return warnings;
     }
-
     public void setWarnings(int warnings)
     {
         this.warnings = warnings;

@@ -1,11 +1,12 @@
 package easybus;
 
-public class Minibus
+public class Minibus extends Car
 {
     int numOfSeat;
 
-    public Minibus(int numOfSeat)
+    public Minibus(int yearlyCost, int fuelConsumption, int licenseNum, String model, int year, int numOfSeat)
     {
+        super(yearlyCost, fuelConsumption, licenseNum, model, year);
         this.numOfSeat = numOfSeat;
     }
 
@@ -13,7 +14,6 @@ public class Minibus
     {
         return numOfSeat;
     }
-
     public void setNumOfSeat(int numOfSeat)
     {
         this.numOfSeat = numOfSeat;
