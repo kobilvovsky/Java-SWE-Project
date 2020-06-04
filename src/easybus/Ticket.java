@@ -15,7 +15,6 @@ public class Ticket
     {
         return ticketid;
     }
-
     public void setTicketid(int ticketid)
     {
         this.ticketid = ticketid;
@@ -25,7 +24,6 @@ public class Ticket
     {
         return currentAmount;
     }
-
     public void setCurrentAmount(int currentAmount)
     {
         this.currentAmount = currentAmount;
