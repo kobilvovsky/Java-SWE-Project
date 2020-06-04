@@ -9,9 +9,13 @@ public abstract class Person
     String sex;
     int age;
     int id;
+<<<<<<< HEAD
 
 
     public Person(String name, String sex, int age){}
+=======
+
+>>>>>>> 5594c3a8bdb613e32aea3e9e3b34efd2baca0466
     public Person(int id, String name, String sex, int age)
     {
         this.id = id;
