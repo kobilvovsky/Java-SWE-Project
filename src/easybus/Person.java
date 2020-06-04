@@ -1,10 +1,15 @@
 package easybus;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Person
+
+public abstract class Person
 {
     String name;
     String sex;
     int age;
+
+    protected List<Passenger> passengers = new ArrayList<>();
 
     public Person(String name, String sex, int age)
     {
@@ -44,3 +49,6 @@ public class Person
     }
 
 }
+
+
+
