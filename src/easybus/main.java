@@ -7,84 +7,13 @@ import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+
 
 public class main
 {
-    private JFrame mainFrame;
-    private JLabel headerLabel;
-    private JLabel statusLabel;
-    private JPanel controlPanel;
-
-    public main(){
-        prepareGUI();
-    }
-
-    private void prepareGUI(){
-        mainFrame = new JFrame("Java SWING Examples");
-        mainFrame.setSize(1042,842);
-        mainFrame.setLayout(new GridLayout(5, 1));
-
-        headerLabel = new JLabel("",JLabel.CENTER );
-        statusLabel = new JLabel("",JLabel.CENTER);
-        statusLabel.setSize(350,100);
-
-        mainFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
-            }
-        });
-        controlPanel = new JPanel();
-        controlPanel.setLayout(new FlowLayout());
-
-        mainFrame.add(headerLabel);
-        mainFrame.add(controlPanel);
-        mainFrame.add(statusLabel);
-        mainFrame.setVisible(true);
-    }
-
-    private void showEventDemo(){
-        headerLabel.setText("Control in action: Button");
-
-        JButton okButton = new JButton("OK");
-        JButton submitButton = new JButton("Submit");
-        JButton cancelButton = new JButton("Cancel");
-
-        okButton.setActionCommand("OK");
-        submitButton.setActionCommand("Submit");
-        cancelButton.setActionCommand("Cancel");
-
-        okButton.addActionListener(new ButtonClickListener());
-        submitButton.addActionListener(new ButtonClickListener());
-        cancelButton.addActionListener(new ButtonClickListener());
-
-        controlPanel.add(okButton);
-        controlPanel.add(submitButton);
-        controlPanel.add(cancelButton);
-
-        mainFrame.setVisible(true);
-    }
-
-    private class ButtonClickListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            String command = e.getActionCommand();
-
-            if( command.equals( "OK" ))  {
-                statusLabel.setText("Ok Button clicked.");
-            } else if( command.equals( "Submit" ) )  {
-                statusLabel.setText("Submit Button clicked.");
-            } else {
-                statusLabel.setText("Cancel Button clicked.");
-            }
-        }
-    }
-
-    public static void main(String[] args) //throws IOException
+    public static void main(String[] args) throws IOException //throws IOException
     {
-        main swingControlDemo = new main();
-        swingControlDemo.showEventDemo();
+        MainMenu mainMenu = new MainMenu();
 
         /*
         Dictionary<Integer, String> menuOption = new Hashtable<Integer, String>();
@@ -100,24 +29,7 @@ public class main
         boolean RUNNING = true;
 
         // =====================
-        Minibus mini = new Minibus(15000, 140, 22222222, "Mercedez", 2012, 30);
-        Bus bus = new Bus(35000, 180, 12345678, "Mercedez", 2016, 50);
-        Car[] cars = {mini, bus};
 
-        Station first = new Station(1, 5, 5);
-        Station second = new Station(2, 5, 10);
-        Station[] stations = {first, second};
-
-        Lineroute route = new Lineroute(first, second);
-        Lineroute[] routes = {route};
-
-        Busdriver roman = new Busdriver("Roman", 31333333, "M", 47, 3, 7500, 0);
-
-        //public Passenger(float credit, int id, String dateOfSub,String name, String sex, int age)
-        Passenger shalom = new Passenger(0, 31633333, "21/05/2010", "Shalom", "M", 24);
-        Passenger roey = new Passenger(0, 316222222, "01/01/2020", "Roey", "M", 28);
-
-        Person[] persons = {roman, shalom, roey};
 
         System.out.println("The options are: ");
         while (menu.hasMoreElements()) {
