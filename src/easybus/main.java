@@ -1,16 +1,57 @@
 package easybus;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import javax.swing.*;
 
 public class main
 {
+
     public static void main(String[] args) throws IOException
     {
-        /* MENU */
+        JTextField fieldName = new JTextField();
+        fieldName.setBounds(90, 220, 200, 30);
+        JFrame f=new JFrame();//creating instance of JFrame
+        f.add(fieldName);
+
+        JButton btnSave = new JButton("Save");
+        btnSave.setBounds(30,120,130, 50);
+        f.add(btnSave);
+        btnSave.addActionListener( e -> {
+            SaveData data = new SaveData();
+            data.name = fieldName.getText();
+            try {
+                ResourceManager.save(data, "1.save");
+            }
+            catch (Exception ex) {
+                System.out.println("Could'nt save: " + ex.getMessage());
+            }
+        });
+
+        JButton btnLoad=new JButton("Load");//creating instance of JButton
+        btnLoad.setBounds(230,120,130, 50);//x axis, y axis, width, height
+        f.add(btnLoad);//adding button in JFrame
+        btnLoad.addActionListener( e -> {
+            try {
+                SaveData data = (SaveData) ResourceManager.load("1.save");
+                fieldName.setText(data.name);
+            }
+            catch (Exception ex) {
+                System.out.println("Could'nt load save: " + ex.getMessage());
+            }
+        });
+
+        f.setSize(400,500);//400 width and 500 height
+        f.setLayout(null);//using no layout managers
+        f.setVisible(true);//making the frame visible
+
+
+
+    /* MENU */
         Dictionary<Integer, String> menuOption = new Hashtable<Integer, String>();
         menuOption.put(1, "Introduction");
         menuOption.put(2, "View Vehicles");
