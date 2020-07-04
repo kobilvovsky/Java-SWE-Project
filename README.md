@@ -16,10 +16,10 @@ TODO:
 5) Do we have 10 classes and 2 leve of hierarchy?
 
 MENU
-![Image of Menu]https://cdn.discordapp.com/attachments/693057066582933579/729039336993062922/unknown.png
+![Image of Menu](https://cdn.discordapp.com/attachments/693057066582933579/729039336993062922/unknown.png)
 
 Adding new data
-![Image of New Data]https://cdn.discordapp.com/attachments/693057066582933579/729039495923761223/unknown.png
+![Image of New Data](https://cdn.discordapp.com/attachments/693057066582933579/729039495923761223/unknown.png)
 
 Viewing data
-![Image of Viewer]https://cdn.discordapp.com/attachments/693057066582933579/729039575779115089/unknown.png
+![Image of Viewer](https://cdn.discordapp.com/attachments/693057066582933579/729039575779115089/unknown.png)
