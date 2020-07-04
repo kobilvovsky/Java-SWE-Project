@@ -2,13 +2,13 @@ package easybus;
 
 public class Station
 {
-    int stationId;
+    static int stationId = 0;
     int posX;
     int posY;
 
-    public Station(int stationId, int posX, int posY)
+    public Station(int posX, int posY)
     {
-        this.stationId = stationId;
+        this.stationId = stationId++;
         this.posX = posX;
         this.posY = posY;
     }
@@ -16,10 +16,6 @@ public class Station
     public int getStationId()
     {
         return stationId;
-    }
-    public void setStationId(int stationId)
-    {
-        this.stationId = stationId;
     }
 
     public int getPosX()

@@ -6,12 +6,12 @@ public class Busdriver extends Person
     int salary;
     int warnings;
 
-    public Busdriver(String name, int id, String sex, int age, int yearExp, int salary, int warnings)
+    public Busdriver(String name, int id, String sex, int age, int yearExp, int salary)
     {
         super(id, name, sex, age);
         this.yearExp = yearExp;
         this.salary = salary;
-        this.warnings = warnings;
+        this.warnings = 0;
     }
 
     public int getYearExp()

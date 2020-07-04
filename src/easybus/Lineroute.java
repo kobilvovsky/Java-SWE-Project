@@ -3,15 +3,22 @@ import java.lang.Math;
 
 public class Lineroute
 {
+    static int routeIndex = 0;
     Station startStation;
     Station endStation;
     float routDistance;
 
     public Lineroute(Station startStation, Station endStation)
     {
+        this.routeIndex = routeIndex++;
         this.startStation = startStation;
         this.endStation = endStation;
-        setRoutDistance();
+        getRouteDistance();
+    }
+
+    public int getRouteIndex()
+    {
+        return routeIndex;
     }
 
     public Station getStartStation()
@@ -32,14 +39,10 @@ public class Lineroute
         this.endStation = endStation;
     }
 
-    public float getRoutDistance()
+    public float getRouteDistance() { return routDistance; }
+    public void setRouteDistance()
     {
-        return routDistance;
-    }
-    public void setRoutDistance()
-    {
-        this.routDistance = (float) Math.sqrt( ((endStation.posX - startStation.posX)^2) -
-                        (endStation.posY - startStation.posY));
+        this.routDistance = (float) Math.sqrt(Math.pow(endStation.posX - startStation.posX, 2) + Math.pow(endStation.posY - startStation.posY, 2));
     }
 
     public void print() {

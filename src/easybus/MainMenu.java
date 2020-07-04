@@ -9,7 +9,7 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class MainMenu extends GUIConstants
+public class MainMenu
 {
     private JFrame mainFrame;
     private JPanel controlPanel;
@@ -24,7 +24,7 @@ public class MainMenu extends GUIConstants
     private JButton viewButton;
     //private JButton deleteButton; ??
 
-    String[] options = { "Vehicles", "Station", "Route", "Customer", "Worker" };
+    String[] options = { "Vehicles", "Station", "Route", "Passenger", "Worker" };
 
     public MainMenu() throws IOException
     {
@@ -33,7 +33,7 @@ public class MainMenu extends GUIConstants
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();
-        mainFrame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        mainFrame.setSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // COMPONENETS INIT
@@ -50,12 +50,12 @@ public class MainMenu extends GUIConstants
 
         // COMPONENETS LOCATION
         picLabel.setBounds(50, 50, 200, 200);
-        headerLabel.setBounds((WINDOW_WIDTH/3)-50+90, 100, 90, 35);
-        classList.setBounds(WINDOW_WIDTH/3+50+90, 100, 250, 35);
-        statusLabel.setBounds(WINDOW_WIDTH/3+90, 300, 200, 35);
+        headerLabel.setBounds((Globals.WINDOW_WIDTH/3)-50+90, 100, 90, 35);
+        classList.setBounds(Globals.WINDOW_WIDTH/3+50+90, 100, 250, 35);
+        statusLabel.setBounds(Globals.WINDOW_WIDTH/3+90, 300, 200, 35);
 
-        insertButton.setBounds(WINDOW_WIDTH/3+50+90, 150, 70, 35);
-        viewButton.setBounds(WINDOW_WIDTH/3+120+90, 150, 70, 35);
+        insertButton.setBounds(Globals.WINDOW_WIDTH/3+50+90, 150, 70, 35);
+        viewButton.setBounds(Globals.WINDOW_WIDTH/3+120+90, 150, 70, 35);
 
         // COMPONENTS TO PANEL
         mainFrame.add(controlPanel);
@@ -67,7 +67,6 @@ public class MainMenu extends GUIConstants
         controlPanel.add(viewButton);
 
         // EVENTS
-        //okButton.setActionCommand("Insert");
         insertButton.setActionCommand("Insert");
         viewButton.setActionCommand("View");
 
@@ -75,16 +74,19 @@ public class MainMenu extends GUIConstants
         viewButton.addActionListener(new ButtonClickListener());
 
         mainFrame.setResizable(false);
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
 
-    private class ButtonClickListener implements ActionListener{
+    private class ButtonClickListener implements ActionListener
+    {
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
             if(command.equals( "Insert" ))  {
                 statusLabel.setText("Insert: " + (String) classList.getSelectedItem());
                 changeDataTo();
+                InsertMenu insertMenu = new InsertMenu();
             } else if(command.equals( "View" ))  {
                 statusLabel.setText("View: " + (String) classList.getSelectedItem());
                 changeDataTo();
@@ -97,22 +99,19 @@ public class MainMenu extends GUIConstants
         int index = Arrays.asList(options).indexOf((String) classList.getSelectedItem());
         switch(index) {
             case 0:
-                currentData = Data.VEHICLE;
+                Globals.setCurrentData(Globals.Data.VEHICLE);
                 break;
-
             case 1:
-                currentData = Data.STATION;
+                Globals.setCurrentData(Globals.Data.STATION);
                 break;
-
             case 2:
-                currentData = Data.ROUTE;
+                Globals.setCurrentData(Globals.Data.ROUTE);
                 break;
-
             case 3:
-                currentData = Data.CUSTOMER;
+                Globals.setCurrentData(Globals.Data.PASSENGER);
                 break;
             case 4:
-                currentData = Data.WORKER;
+                Globals.setCurrentData(Globals.Data.WORKER);
                 break;
         }
     }
