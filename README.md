@@ -14,3 +14,12 @@ TODO:
 3) Use a design pattern of some sort
 4) Create JUnit
 5) Do we have 10 classes and 2 leve of hierarchy?
+
+MENU
+https://cdn.discordapp.com/attachments/693057066582933579/729039336993062922/unknown.png
+
+Adding new data
+https://cdn.discordapp.com/attachments/693057066582933579/729039495923761223/unknown.png
+
+Viewing data
+https://cdn.discordapp.com/attachments/693057066582933579/729039575779115089/unknown.png
