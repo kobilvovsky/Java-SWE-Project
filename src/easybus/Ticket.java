@@ -1,6 +1,7 @@
 package easybus;
+import java.io.Serializable;
 
-public class Ticket
+public class Ticket implements Serializable
 {
     int ticketid;
     int currentAmount;

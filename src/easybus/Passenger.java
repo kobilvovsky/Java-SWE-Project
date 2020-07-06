@@ -1,6 +1,7 @@
 package easybus;
+import java.io.Serializable;
 
-public class Passenger extends Person
+public class Passenger extends Person implements Serializable
 {
     float credit;
     int id;

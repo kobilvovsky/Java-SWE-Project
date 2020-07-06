@@ -1,9 +1,11 @@
 package easybus;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class InsertMenu
 {
@@ -52,12 +54,18 @@ public class InsertMenu
         public void actionPerformed(ActionEvent e) {
             String values[] = new String[inputField.length];
             for(int i = 0; i < inputField.length; i++) values[i] = inputField[i].getText();
-            ValidateData(values);
+
+            try {
+                ValidateData(values);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 
-    private boolean ValidateData(String[] values) {
-        boolean isValid = false;
+    private boolean ValidateData(String[] values) throws IOException
+    {
+        //boolean isValid = true;
 
         switch(Globals.getCurrentData()) {
             case VEHICLE:
@@ -66,25 +74,32 @@ public class InsertMenu
                         values[1], Integer.parseInt(values[2]), Integer.parseInt(values[5]));
 
                 Globals.cars.insert(newBus);
+                Globals.save(Globals.Data.VEHICLE);
                 break;
 
             case STATION:
                 //labelTexts = new String[]{"stationId", "posX", "posY"};
                 Station newStation = new Station(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
+
                 Globals.stations.insert(newStation);
+                Globals.save(Globals.Data.STATION);
                 break;
 
             case ROUTE:
                 //labelTexts = new String[]{"startStation ID", "endStation ID"};
                 Lineroute newRoute = new Lineroute(Globals.stations.getStation(Integer.parseInt(values[0])), Globals.stations.getStation(Integer.parseInt(values[1])));
+
                 Globals.routes.insert(newRoute);
+                Globals.save(Globals.Data.ROUTE);
                 break;
 
             case PASSENGER:
                 //labelTexts = new String[]{"Id", "Name", "Sex", "Age", "dateOfSub", "Credit"};
                 Passenger newCustomer = new Passenger(Integer.parseInt(values[5]), Integer.parseInt(values[0]), values[4],
                         values[1], values[2], Integer.parseInt(values[3]));
+
                 Globals.customers.insert(newCustomer);
+                Globals.save(Globals.Data.PASSENGER);
                 break;
 
             case WORKER:
@@ -92,19 +107,21 @@ public class InsertMenu
                 // public Busdriver(String name, int id, String sex, int age, int yearExp, int salary)
                 Busdriver newWorker = new Busdriver(values[1], Integer.parseInt(values[0]), values[2],
                         Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
+
                 Globals.workers.insert(newWorker);
+                Globals.save(Globals.Data.WORKER);
                 break;
         }
 
 
-        if(isValid)
-            Save();
+        //if(isValid)
+        //    Save();
 
-        return false;
+        return true;
     }
 
     private void Save() {
-        // ...
+        //..
     }
 
     private void prepareInsertMenu() {

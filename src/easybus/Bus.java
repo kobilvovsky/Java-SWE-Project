@@ -1,6 +1,8 @@
 package easybus;
 
-public class Bus extends Car
+import java.io.Serializable;
+
+public class Bus extends Car implements Serializable
 {
     int numOfSeat;
 
@@ -16,6 +18,9 @@ public class Bus extends Car
     }
     public void setNumOfSeat(int numOfSeat)
     {
-        this.numOfSeat = numOfSeat;
+        if(numOfSeat < 0||numOfSeat > 100)
+            System.out.println("Invalid NumofSeat");
+        else
+            this.numOfSeat = numOfSeat;
     }
 }

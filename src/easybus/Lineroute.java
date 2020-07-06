@@ -1,16 +1,18 @@
 package easybus;
+import java.io.Serializable;
 import java.lang.Math;
 
-public class Lineroute
+public class Lineroute implements Serializable
 {
-    static int routeIndex = 0;
+    static int counter = 1;
+    int routeIndex;
     Station startStation;
     Station endStation;
     float routDistance;
 
     public Lineroute(Station startStation, Station endStation)
     {
-        this.routeIndex = routeIndex++;
+        this.routeIndex = counter++;
         this.startStation = startStation;
         this.endStation = endStation;
         getRouteDistance();

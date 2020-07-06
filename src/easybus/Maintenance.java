@@ -1,6 +1,8 @@
 package easybus;
 
-public class Maintenance
+import java.io.Serializable;
+
+public class Maintenance implements Serializable
 {
     int yearlyCost;
     int fuelConsumption; //in liter

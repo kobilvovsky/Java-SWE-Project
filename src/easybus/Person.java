@@ -1,17 +1,14 @@
 package easybus;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-
-public class Person
+public class Person implements Serializable
 {
     String name;
     String sex;
     int age;
     int id;
 
-    public Person(String name, String sex, int age){}
-
+    public Person(String name, String sex, int age) {}
     public Person(int id, String name, String sex, int age)
     {
         this.id = id;

@@ -1,6 +1,8 @@
 package easybus;
 
-public class Minibus extends Car
+import java.io.Serializable;
+
+public class Minibus extends Car implements Serializable
 {
     int numOfSeat;
 

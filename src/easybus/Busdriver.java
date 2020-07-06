@@ -1,6 +1,8 @@
 package easybus;
 
-public class Busdriver extends Person
+import java.io.Serializable;
+
+public class Busdriver extends Person implements Serializable
 {
     int yearExp;
     int salary;
@@ -20,7 +22,10 @@ public class Busdriver extends Person
     }
     public void setYearExp(int yearExp)
     {
-        this.yearExp = yearExp;
+        if (yearExp < 0 || yearExp > 80)
+            System.out.println("Invalid NumofSeat");
+        else
+            this.yearExp = yearExp;
     }
 
     public int getSalary()

@@ -2,7 +2,12 @@ package easybus;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ViewMenu
 {
@@ -39,9 +44,47 @@ public class ViewMenu
         controlPanel.add(deleteButton, BorderLayout.SOUTH);
 
         // EVENTS
+        deleteButton.addActionListener(new ViewMenu.ButtonClickListener());
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+    }
+
+    private class ButtonClickListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e) {
+            int column = 0;
+            int row = table.getSelectedRow();
+            String value = table.getModel().getValueAt(row, column).toString();
+
+            switch(Globals.getCurrentData()) {
+                case VEHICLE:
+                    Globals.cars.remove(Globals.cars.getCarById(Integer.parseInt(value)));
+                    break;
+
+                case STATION:
+                    Globals.stations.remove(Globals.stations.getStationById(Integer.parseInt(value)));
+                    Globals.stations.print();
+                    break;
+
+                case ROUTE:
+                    Globals.routes.remove(Globals.routes.getRouteById(Integer.parseInt(value)));
+                    break;
+
+                case PASSENGER:
+                    Globals.customers.remove(Globals.customers.getPassengerById(Integer.parseInt(value)));
+                    break;
+
+                case WORKER:
+                    Globals.workers.remove(Globals.workers.getWorkerById(Integer.parseInt(value)));
+                    break;
+
+            }
+
+            System.out.println("value: " + value + " deleted!");
+            //DefaultTableModel model = (DefaultTableModel) table.getModel();
+            //model.removeRow(row);
+        }
     }
 
     private void prepareViewTable() {

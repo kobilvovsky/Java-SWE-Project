@@ -1,6 +1,7 @@
 package easybus;
+import java.io.Serializable;
 
-public class Car extends Maintenance
+public class Car extends Maintenance implements Serializable
 {
     int licenseNum;
     String model;

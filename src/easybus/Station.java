@@ -1,14 +1,16 @@
 package easybus;
+import java.io.Serializable;
 
-public class Station
+public class Station implements Serializable
 {
-    static int stationId = 0;
+    static int counter = 1;
+    int stationId;
     int posX;
     int posY;
 
     public Station(int posX, int posY)
     {
-        this.stationId = stationId++;
+        this.stationId = counter++;
         this.posX = posX;
         this.posY = posY;
     }
