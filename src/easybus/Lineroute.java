@@ -1,45 +1,52 @@
 package easybus;
+import java.lang.Math;
 
 public class Lineroute
 {
-   int startStation;
-   int endStation;
-   int routDistance;
+    Station startStation;
+    Station endStation;
+    float routDistance;
 
-    public Lineroute(int startStation, int endStation, int routDistance)
+    public Lineroute(Station startStation, Station endStation)
     {
         this.startStation = startStation;
         this.endStation = endStation;
-        this.routDistance = routDistance;
+        this.setRoutDistance();
     }
 
-    public int getStartStation()
+    public Station getStartStation()
     {
         return startStation;
     }
-
-    public void setStartStation(int startStation)
+    public void setStartStation(Station startStation)
     {
         this.startStation = startStation;
     }
 
-    public int getEndStation()
+    public Station getEndStation()
     {
         return endStation;
     }
-
-    public void setEndStation(int endStation)
+    public void setEndStation(Station endStation)
     {
         this.endStation = endStation;
     }
 
-    public int getRoutDistance()
+    public float getRoutDistance()
     {
         return routDistance;
     }
-
-    public void setRoutDistance(int routDistance)
+    public void setRoutDistance()
     {
-        this.routDistance = routDistance;
+        float d;
+        float distance = (float) (( Math.pow(endStation.posX - startStation.posX,(float) 2)) + (Math.pow(endStation.posY - startStation.posY,(float) 2)));
+        d = distance;
+        this.routDistance = (float) Math.sqrt(distance);
+    }
+
+    public void print() {
+        startStation.print();
+        System.out.println("/");
+        endStation.print();
     }
 }
