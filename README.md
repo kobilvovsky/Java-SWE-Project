@@ -15,6 +15,12 @@ TODO:
 4) Create JUnit
 5) Do we have 10 classes and 2 leve of hierarchy?
 
+=======================
+6) 1 Abstract Class
+7) 2 Design Pattern + 1 Archeticture
+8) JUnit of logic classes only
+9) Video - 7 Minutes max
+
 ## MENU
 
 ![Image of Menu](https://cdn.discordapp.com/attachments/693057066582933579/729039336993062922/unknown.png)
