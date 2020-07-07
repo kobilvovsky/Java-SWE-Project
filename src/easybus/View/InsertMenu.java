@@ -1,8 +1,8 @@
-package easybus;
+package easybus.View;
+
+import easybus.Model.*;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class InsertMenu
         controlPanel.add(headerLabel);
 
         // EVENTS
-        saveButton.addActionListener(new InsertMenu.ButtonClickListener());
+        saveButton.addActionListener(new ButtonClickListener());
 
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
@@ -63,65 +63,80 @@ public class InsertMenu
         }
     }
 
-    private boolean ValidateData(String[] values) throws IOException
+    private void ValidateData(String[] values) throws IOException
     {
-        //boolean isValid = true;
+        boolean isValid = false;
 
         switch(Globals.getCurrentData()) {
             case VEHICLE:
                 //labelTexts = new String[]{"licenseNum", "Model", "Year", "Fuel", "yearlyCost", "Seats"};
-                Bus newBus = new Bus(Integer.parseInt(values[4]), Integer.parseInt(values[3]), Integer.parseInt(values[0]),
-                        values[1], Integer.parseInt(values[2]), Integer.parseInt(values[5]));
+                if(Globals.isInt(new String[]{ values[4], values[3], values[0], values[2], values[5] })) {
+                    Bus newBus = new Bus(Integer.parseInt(values[4]), Integer.parseInt(values[3]), Integer.parseInt(values[0]),
+                            values[1], Integer.parseInt(values[2]), Integer.parseInt(values[5]));
 
-                Globals.cars.insert(newBus);
-                Globals.save(Globals.Data.VEHICLE);
+                    Globals.cars.insert(newBus);
+                    Globals.save(Globals.Data.VEHICLE);
+                    isValid = true;
+                }
                 break;
 
             case STATION:
                 //labelTexts = new String[]{"stationId", "posX", "posY"};
-                Station newStation = new Station(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
+                if(Globals.isInt(new String[]{ values[0], values[1] })) {
+                    Station newStation = new Station(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
 
-                Globals.stations.insert(newStation);
-                Globals.save(Globals.Data.STATION);
+                    Globals.stations.insert(newStation);
+                    Globals.save(Globals.Data.STATION);
+                    isValid = true;
+                }
                 break;
 
             case ROUTE:
                 //labelTexts = new String[]{"startStation ID", "endStation ID"};
-                Lineroute newRoute = new Lineroute(Globals.stations.getStation(Integer.parseInt(values[0])), Globals.stations.getStation(Integer.parseInt(values[1])));
+                if(Globals.stations.getStationById(Integer.parseInt(values[0])) != null && Globals.stations.getStationById(Integer.parseInt(values[1])) != null) {
+                    if(Globals.isInt(new String[]{ values[0], values[1] })) {
+                        Lineroute newRoute = new Lineroute(Globals.stations.getStationById(Integer.parseInt(values[0])),
+                                Globals.stations.getStationById(Integer.parseInt(values[1])));
 
-                Globals.routes.insert(newRoute);
-                Globals.save(Globals.Data.ROUTE);
+                        Globals.routes.insert(newRoute);
+                        Globals.save(Globals.Data.ROUTE);
+                        isValid = true;
+                    }
+                }
                 break;
 
             case PASSENGER:
                 //labelTexts = new String[]{"Id", "Name", "Sex", "Age", "dateOfSub", "Credit"};
-                Passenger newCustomer = new Passenger(Integer.parseInt(values[5]), Integer.parseInt(values[0]), values[4],
-                        values[1], values[2], Integer.parseInt(values[3]));
+                if(Globals.isInt(new String[]{ values[5], values[0], values[3] })) {
+                    Passenger newCustomer = new Passenger(Integer.parseInt(values[5]), Integer.parseInt(values[0]), values[4],
+                            values[1], values[2], Integer.parseInt(values[3]));
 
-                Globals.customers.insert(newCustomer);
-                Globals.save(Globals.Data.PASSENGER);
+                    Globals.customers.insert(newCustomer);
+                    Globals.save(Globals.Data.PASSENGER);
+                    isValid = true;
+                }
                 break;
 
             case WORKER:
                 //labelTexts = new String[]{"Id", "Name", "Sex", "Age", "Experience (year)", "Salary"};
-                // public Busdriver(String name, int id, String sex, int age, int yearExp, int salary)
-                Busdriver newWorker = new Busdriver(values[1], Integer.parseInt(values[0]), values[2],
-                        Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
+                if(Globals.isInt(new String[]{ values[0], values[3], values[4], values[5] })) {
+                    Busdriver newWorker = new Busdriver(values[1], Integer.parseInt(values[0]), values[2],
+                            Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
 
-                Globals.workers.insert(newWorker);
-                Globals.save(Globals.Data.WORKER);
+                    Globals.workers.insert(newWorker);
+                    Globals.save(Globals.Data.WORKER);
+                    isValid = true;
+                }
                 break;
         }
 
 
-        //if(isValid)
-        //    Save();
-
-        return true;
-    }
-
-    private void Save() {
-        //..
+        if(!isValid)
+            JOptionPane.showMessageDialog(null, "You have entered an invalid value! (String)\nPlease fix your errors!",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(null, "You have entered a new " + Globals.getCurrentData().toString() + "!",
+                    "Success Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void prepareInsertMenu() {

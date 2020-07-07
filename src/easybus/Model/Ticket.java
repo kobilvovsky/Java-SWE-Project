@@ -1,4 +1,4 @@
-package easybus;
+package easybus.Model;
 import java.io.Serializable;
 
 public class Ticket implements Serializable

@@ -1,6 +1,6 @@
-package easybus;
+package easybus.View;
 
-import java.awt.*;
+import easybus.Model.Globals;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,30 +19,27 @@ public class MainMenu
 
     private JComboBox classList;
     private JLabel headerLabel;
-    private JLabel statusLabel;
     private JButton insertButton;
     private JButton viewButton;
-    //private JButton deleteButton; ??
 
     String[] options = { "Vehicles", "Station", "Route", "Passenger", "Worker" };
 
-    public MainMenu() throws IOException
+    public MainMenu(String title) throws IOException
     {
         // WINDOW DEFINITIONS
-        mainFrame = new JFrame("[easyBus] Menu");
+        title = "[easyBus] Menu (" + title + ")";
+        mainFrame = new JFrame(title);
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();
         mainFrame.setSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // COMPONENETS INIT
         myPicture = ImageIO.read(new File("C:\\Users\\Erez\\Pictures\\logo.png"));
         picLabel = new JLabel(new ImageIcon(myPicture));
 
         headerLabel = new JLabel("Select Menu:");
-        classList = new JComboBox(options); //classList.addActionListener();
-        statusLabel = new JLabel("Control in action: Button");
+        classList = new JComboBox(options);
         insertButton = new JButton("Insert");
         viewButton = new JButton("View");
 
@@ -52,8 +49,6 @@ public class MainMenu
         picLabel.setBounds(50, 50, 200, 200);
         headerLabel.setBounds((Globals.WINDOW_WIDTH/3)-50+90, 100, 90, 35);
         classList.setBounds(Globals.WINDOW_WIDTH/3+50+90, 100, 250, 35);
-        statusLabel.setBounds(Globals.WINDOW_WIDTH/3+90, 300, 200, 35);
-
         insertButton.setBounds(Globals.WINDOW_WIDTH/3+50+90, 150, 70, 35);
         viewButton.setBounds(Globals.WINDOW_WIDTH/3+120+90, 150, 70, 35);
 
@@ -62,7 +57,6 @@ public class MainMenu
         controlPanel.add(picLabel);
         controlPanel.add(headerLabel);
         controlPanel.add(classList);
-        controlPanel.add(statusLabel);
         controlPanel.add(insertButton);
         controlPanel.add(viewButton);
 
@@ -83,13 +77,10 @@ public class MainMenu
         public void actionPerformed(ActionEvent e) {
             String command = e.getActionCommand();
 
-            if(command.equals( "Insert" ))  {
-                statusLabel.setText("Insert: " + (String) classList.getSelectedItem());
-                changeDataTo();
+            changeDataTo();
+            if(command.equals("Insert"))  {
                 InsertMenu insertMenu = new InsertMenu();
-            } else if(command.equals( "View" ))  {
-                statusLabel.setText("View: " + (String) classList.getSelectedItem());
-                changeDataTo();
+            } else if(command.equals("View"))  {
                 ViewMenu viewMenu = new ViewMenu();
             }
         }

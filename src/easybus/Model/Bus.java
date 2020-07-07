@@ -1,10 +1,9 @@
-package easybus;
-
+package easybus.Model;
 import java.io.Serializable;
 
 public class Bus extends Car implements Serializable
 {
-    int numOfSeat;
+    private int numOfSeat;
 
     public Bus(int yearlyCost, int fuelConsumption, int licenseNum, String model, int year, int numOfSeat)
     {

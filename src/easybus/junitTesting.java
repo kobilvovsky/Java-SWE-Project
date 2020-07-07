@@ -1,5 +1,8 @@
 package easybus;
 
+import easybus.Model.Lineroute;
+import easybus.Model.Minibus;
+import easybus.Model.Station;
 import org.junit.*;
 
 public class junitTesting

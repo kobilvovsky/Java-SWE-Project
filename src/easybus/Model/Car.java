@@ -1,15 +1,15 @@
-package easybus;
+package easybus.Model;
 import java.io.Serializable;
 
 public class Car extends Maintenance implements Serializable
 {
-    int licenseNum;
-    String model;
-    int year;
+    private int licenseNum;
+    private String model;
+    private int year;
 
     // GPS location
-    int posX;
-    int posY;
+    private int posX;
+    private int posY;
 
     public Car(int yearlyCost, int fuelConsumption, int licenseNum, String model, int year)
     {

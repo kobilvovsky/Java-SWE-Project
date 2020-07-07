@@ -1,10 +1,11 @@
-package easybus;
+package easybus.Model;
 
+import easybus.Collection;
 import java.io.*;
 
 public class Globals
 {
-    enum Data {
+    public enum Data {
         VEHICLE,
         STATION,
         ROUTE,
@@ -22,7 +23,7 @@ public class Globals
     public static Collection<Passenger> customers;
     public static Collection<Busdriver> workers;
 
-    public Globals() throws Exception
+    public Globals()
     {
         System.out.println("init Globals!!");
 
@@ -38,10 +39,12 @@ public class Globals
 
                     case STATION:
                         stations = (Collection<Station>) ois.readObject();
+                        Station.counter = stations.getElement(stations.getSize()-1).getStationId() + 1;
                         break;
 
                     case ROUTE:
                         routes = (Collection<Lineroute>) ois.readObject();
+                        Lineroute.counter = routes.getElement(routes.getSize()-1).getRouteIndex() + 1;
                         break;
 
                     case PASSENGER:
@@ -116,33 +119,16 @@ public class Globals
         oos.close();
     }
 
-    // VEHICLES
-    //Minibus mini = new Minibus(15000, 140, 22222222, "Skoda", 2012, 30);
-    //Bus bus = new Bus(35000, 180, 12345678, "Scania", 2016, 50);
-    //public static Collection<Car> cars = new Collection<Car>();
-    //Car[] cars = {mini, bus};
+    public static boolean isInt(String[] strArr) {
+        for(int i = 0; i < strArr.length; i++) {
+            for (char ch: strArr[i].toCharArray()) {
+                if(!Character.isDigit(ch))
+                    return false;
+            }
+        }
 
-    // STATIONS
-    //Station first = new Station(1, 7, 8);
-    //Station second = new Station(2, 3, 2);
-    //public static Collection<Station> stations = new Collection<Station>();
-    //Station[] stations = {first, second};
-
-    // ROUTES
-    //Lineroute route = new Lineroute(first, second);
-    //public static Collection<Lineroute> routes = new Collection<Lineroute>();
-    //Lineroute[] routes = {route};
-
-    // WORKERS
-    //Busdriver roman = new Busdriver("Roman", 31333333, "M", 47, 3, 7500);
-    //public static Collection<Busdriver> workers = new Collection<Busdriver>();
-    //Busdriver[] workers = {roman};
-
-    // CUSTOMERS
-    //Passenger shalom = new Passenger(10, 31633333, "21/05/2010", "Shalom", "M", 24);
-    //Passenger roey = new Passenger(2, 316222222, "01/01/2020", "Roey", "M", 28);
-    //public static Collection<Passenger> customers = new Collection<Passenger>();
-    //Passenger[] customers = {shalom, roey};
+        return true;
+    }
 
     public static void setCurrentData(Data d) { currentData = d; }
     public static Data getCurrentData() { return currentData; }

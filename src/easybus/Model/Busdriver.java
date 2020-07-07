@@ -1,12 +1,11 @@
-package easybus;
-
+package easybus.Model;
 import java.io.Serializable;
 
 public class Busdriver extends Person implements Serializable
 {
-    int yearExp;
-    int salary;
-    int warnings;
+    private int yearExp;
+    private int salary;
+    private int warnings;
 
     public Busdriver(String name, int id, String sex, int age, int yearExp, int salary)
     {

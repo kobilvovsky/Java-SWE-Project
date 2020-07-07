@@ -1,13 +1,14 @@
 package easybus;
-import javax.sound.sampled.Line;
+import easybus.Model.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class Collection<T> implements Serializable
 {
+    private static final long serialVersionUID = 1L;
     private List<T> collection = new ArrayList<T>();
 
     public Collection() { System.out.println("A new List has been initialized!"); }
@@ -26,73 +27,53 @@ public class Collection<T> implements Serializable
             Car car = (Car) it.next();
 
             if(car.getLicenseNum() == id)
-                return (Car) it.next();
+                return car;
         }
 
-        throw new NoSuchElementException();
+        return null;
     }
     public Station getStationById(int id) {
         Iterator it = collection.iterator();
 
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Station station = (Station) it.next();
-
-            if(station.getStationId() == id) {
-                station.print();
-                return (Station) it.next();
+            if (station.getStationId() == id) {
+                return station;
             }
         }
-
-        throw new NoSuchElementException();
+        return null;
     }
     public Lineroute getRouteById(int id) {
         Iterator it = collection.iterator();
 
         while(it.hasNext()) {
             Lineroute route = (Lineroute) it.next();
-
             if(route.getRouteIndex() == id)
-                return (Lineroute) it.next();
+                return route;
         }
 
-        throw new NoSuchElementException();
+        return null;
     }
     public Passenger getPassengerById(int id) {
         Iterator it = collection.iterator();
 
         while(it.hasNext()) {
             Passenger passenger = (Passenger) it.next();
-
             if(passenger.getId() == id)
-                return (Passenger) it.next();
+                return passenger;
         }
 
-        throw new NoSuchElementException();
+        return null;
     }
     public Busdriver getWorkerById(int id) {
         Iterator it = collection.iterator();
 
         while(it.hasNext()) {
             Busdriver driver = (Busdriver) it.next();
-
             if(driver.getId() == id)
-                return (Busdriver) it.next();
+                return driver;
         }
 
-        throw new NoSuchElementException();
-    }
-
-    public Station getStation(int byIndex) {
-        Iterator it = collection.iterator();
-
-        while(it.hasNext()) {
-            Station st = (Station) it.next();
-
-            if(st.getStationId() == byIndex)
-                return st;
-        }
-
-        throw new NoSuchElementException();
-        //return new Station(-1, -1);
+        return null;
     }
 }

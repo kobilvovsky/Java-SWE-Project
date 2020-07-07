@@ -1,9 +1,10 @@
-package easybus;
+package easybus.View;
+
+import easybus.Model.Globals;
+import easybus.Model.Lineroute;
+import easybus.Model.Station;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +45,7 @@ public class ViewMenu
         controlPanel.add(deleteButton, BorderLayout.SOUTH);
 
         // EVENTS
-        deleteButton.addActionListener(new ViewMenu.ButtonClickListener());
+        deleteButton.addActionListener(new ButtonClickListener());
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
@@ -53,37 +54,69 @@ public class ViewMenu
     private class ButtonClickListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e) {
+            boolean success = false;
             int column = 0;
             int row = table.getSelectedRow();
             String value = table.getModel().getValueAt(row, column).toString();
 
             switch(Globals.getCurrentData()) {
                 case VEHICLE:
-                    Globals.cars.remove(Globals.cars.getCarById(Integer.parseInt(value)));
+                    try {
+                        Globals.cars.remove(Globals.cars.getCarById(Integer.parseInt(value)));
+                        Globals.save(Globals.Data.VEHICLE);
+                        success = true;
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     break;
 
                 case STATION:
-                    Globals.stations.remove(Globals.stations.getStationById(Integer.parseInt(value)));
-                    Globals.stations.print();
+                    try {
+                        Globals.stations.remove(Globals.stations.getStationById(Integer.parseInt(value)));
+                        Station.counter = Globals.stations.getElement(Globals.stations.getSize()-1).getStationId() + 1;
+                        Globals.save(Globals.Data.STATION);
+                        success = true;
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     break;
 
                 case ROUTE:
-                    Globals.routes.remove(Globals.routes.getRouteById(Integer.parseInt(value)));
+                    try {
+                        Globals.routes.remove(Globals.routes.getRouteById(Integer.parseInt(value)));
+                        Lineroute.counter = Globals.routes.getElement(Globals.routes.getSize()-1).getRouteIndex() + 1;
+                        Globals.save(Globals.Data.ROUTE);
+                        success = true;
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     break;
 
                 case PASSENGER:
-                    Globals.customers.remove(Globals.customers.getPassengerById(Integer.parseInt(value)));
+                    try {
+                        Globals.customers.remove(Globals.customers.getPassengerById(Integer.parseInt(value)));
+                        Globals.save(Globals.Data.PASSENGER);
+                        success = true;
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     break;
 
                 case WORKER:
-                    Globals.workers.remove(Globals.workers.getWorkerById(Integer.parseInt(value)));
+                    try {
+                        Globals.workers.remove(Globals.workers.getWorkerById(Integer.parseInt(value)));
+                        Globals.save(Globals.Data.WORKER);
+                        success = true;
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                     break;
 
             }
 
-            System.out.println("value: " + value + " deleted!");
-            //DefaultTableModel model = (DefaultTableModel) table.getModel();
-            //model.removeRow(row);
+            if(success)
+                JOptionPane.showMessageDialog(null, "You have deleted a " + Globals.getCurrentData().toString() + " of id " + value + "!",
+                    "Success Message", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -118,8 +151,8 @@ public class ViewMenu
                 data = new String[Globals.routes.getSize()][24];
                 for(int i = 0; i < Globals.routes.getSize(); i++) {
                     data[i][j++] = Integer.toString(Globals.routes.getElement(i).getRouteIndex());
-                    data[i][j++] = Integer.toString(Globals.routes.getElement(i).startStation.getStationId());
-                    data[i][j++] = Integer.toString(Globals.routes.getElement(i).endStation.getStationId());
+                    data[i][j++] = Integer.toString(Globals.routes.getElement(i).getStartStation().getStationId());
+                    data[i][j++] = Integer.toString(Globals.routes.getElement(i).getEndStation().getStationId());
                     data[i][j++] = Float.toString(Globals.routes.getElement(i).getRouteDistance());
                     j = 0;
                 }

@@ -1,12 +1,12 @@
-package easybus;
+package easybus.Model;
 import java.io.Serializable;
 
 public class Station implements Serializable
 {
-    static int counter = 1;
-    int stationId;
-    int posX;
-    int posY;
+    public static int counter = 1;
+    private int stationId;
+    private int posX;
+    private int posY;
 
     public Station(int posX, int posY)
     {
