@@ -17,8 +17,11 @@ TODO:
 
 =======================
 6) 1 Abstract Class
+
 7) 2 Design Pattern + 1 Archeticture
+
 8) JUnit of logic classes only
+
 9) Video - 7 Minutes max
 
 ## MENU
