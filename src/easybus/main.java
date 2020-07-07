@@ -7,21 +7,29 @@ import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.swing.*;
+import java.awt.event.*;
+
 
 public class main
 {
+        public static void main(String[] args) throws IOException
+        {
+            LoginFrame frame=new LoginFrame();
+            frame.setTitle("Login Form");
+            frame.setVisible(true);
+            frame.setBounds(10,10,370,600);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setResizable(false);
 
-    public static void main(String[] args) throws IOException
-    {
-        JTextField fieldName = new JTextField();
-        fieldName.setBounds(90, 220, 200, 30);
-        JFrame f=new JFrame();//creating instance of JFrame
-        f.add(fieldName);
+            JTextField fieldName = new JTextField();
+            fieldName.setBounds(90, 220, 200, 30);
+            JFrame f=new JFrame();//creating instance of JFrame
+            f.add(fieldName);
 
-        JButton btnSave = new JButton("Save");
-        btnSave.setBounds(30,120,130, 50);
-        f.add(btnSave);
-        btnSave.addActionListener( e -> {
+            JButton btnSave = new JButton("Save");
+            btnSave.setBounds(30,120,130, 50);
+            f.add(btnSave);
+            btnSave.addActionListener( e -> {
             SaveData data = new SaveData();
             data.name = fieldName.getText();
             try {
