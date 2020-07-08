@@ -3,7 +3,7 @@ package easybus.Model;
 import java.io.*;
 import java.util.Iterator;
 
-public class WorkerCollection
+public class WorkerCollection implements Base
 {
     private static Collection<Busdriver> workers;
     private String fileName;
@@ -74,5 +74,10 @@ public class WorkerCollection
         }
 
         return false;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("WorkerCollection");
     }
 }

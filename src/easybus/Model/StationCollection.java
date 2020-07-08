@@ -3,7 +3,7 @@ package easybus.Model;
 import java.io.*;
 import java.util.Iterator;
 
-public class StationCollection
+public class StationCollection implements Base
 {
     private static Collection<Station> stations;
     private String fileName;
@@ -89,5 +89,10 @@ public class StationCollection
         }
 
         return false;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("StationCollection");
     }
 }

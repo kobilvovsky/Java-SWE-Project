@@ -3,7 +3,7 @@ package easybus.Model;
 import java.io.*;
 import java.util.Iterator;
 
-public class RouteCollection
+public class RouteCollection implements Base
 {
     private static Collection<Lineroute> routes;
     private String fileName;
@@ -89,5 +89,10 @@ public class RouteCollection
         }
 
         return false;
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("RouteCollection");
     }
 }
