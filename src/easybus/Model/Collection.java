@@ -1,9 +1,7 @@
 package easybus.Model;
-import easybus.Model.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Collection<T> implements Serializable
@@ -21,60 +19,4 @@ public class Collection<T> implements Serializable
     public T getElement(int i) { return collection.get(i); }
 
     public List<T> getCollection() { return collection; }
-    public Car getCarById(int id) {
-        Iterator it = collection.iterator();
-
-        while(it.hasNext()) {
-            Car car = (Car) it.next();
-
-            if(car.getLicenseNum() == id)
-                return car;
-        }
-
-        return null;
-    }
-    public Station getStationById(int id) {
-        Iterator it = collection.iterator();
-
-        while (it.hasNext()) {
-            Station station = (Station) it.next();
-            if (station.getStationId() == id) {
-                return station;
-            }
-        }
-        return null;
-    }
-    public Lineroute getRouteById(int id) {
-        Iterator it = collection.iterator();
-
-        while(it.hasNext()) {
-            Lineroute route = (Lineroute) it.next();
-            if(route.getRouteIndex() == id)
-                return route;
-        }
-
-        return null;
-    }
-    public Passenger getPassengerById(int id) {
-        Iterator it = collection.iterator();
-
-        while(it.hasNext()) {
-            Passenger passenger = (Passenger) it.next();
-            if(passenger.getId() == id)
-                return passenger;
-        }
-
-        return null;
-    }
-    public Busdriver getWorkerById(int id) {
-        Iterator it = collection.iterator();
-
-        while(it.hasNext()) {
-            Busdriver driver = (Busdriver) it.next();
-            if(driver.getId() == id)
-                return driver;
-        }
-
-        return null;
-    }
 }

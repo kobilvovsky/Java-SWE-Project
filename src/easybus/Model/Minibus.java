@@ -1,5 +1,4 @@
 package easybus.Model;
-
 import java.io.Serializable;
 
 public class Minibus extends Car implements Serializable
@@ -9,7 +8,7 @@ public class Minibus extends Car implements Serializable
     public Minibus(int yearlyCost, int fuelConsumption, int licenseNum, String model, int year, int numOfSeat)
     {
         super(yearlyCost, fuelConsumption, licenseNum, model, year);
-        this.numOfSeat = numOfSeat;
+        setNumOfSeat(numOfSeat);
     }
 
     public int getNumOfSeat()
@@ -18,6 +17,24 @@ public class Minibus extends Car implements Serializable
     }
     public void setNumOfSeat(int numOfSeat)
     {
-        this.numOfSeat = numOfSeat;
+        // 0 <= x <= 15
+        if(numOfSeat < getMinPassengers() || numOfSeat > 15)
+            System.out.println("Invalid NumofSeat");
+        else
+            this.numOfSeat = numOfSeat;
+    }
+
+    @Override
+    public void horn() {
+        System.out.println("BEEP BEEP!");
+    }
+
+    @Override
+    public int getSeats() {
+        return getNumOfSeat();
+    }
+
+    public int getMinPassengers(){
+        return 0;
     }
 }

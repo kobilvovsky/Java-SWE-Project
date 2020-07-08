@@ -41,6 +41,17 @@ public class RouteCollection
 
         return null;
     }
+    public int lastRouteId() {
+        Iterator it = getRoutes().getCollection().iterator();
+        int max = 1;
+
+        while(it.hasNext()) {
+            Lineroute lr = (Lineroute) it.next();
+            max = lr.getRouteIndex();
+        }
+
+        return max;
+    }
     public int getSize() { return getRoutes().getSize(); }
     public String[] getColumns() { return columns; }
 
@@ -48,6 +59,8 @@ public class RouteCollection
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {
             ObjectInputStream ois = new ObjectInputStream(fis);
             routes = (Collection<Lineroute>) ois.readObject();
+            Lineroute.setCounter(lastRouteId());
+            System.out.println("loadRoutes" + Station.counter );
             System.out.println("Loaded: " + getFileName() + ".ser");
             ois.close();
 

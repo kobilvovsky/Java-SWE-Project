@@ -1,7 +1,8 @@
 package easybus.Model;
+
 import java.io.Serializable;
 
-public class Car extends Maintenance implements Serializable
+abstract class Car extends Maintenance implements Serializable
 {
     private int licenseNum;
     private String model;
@@ -14,22 +15,18 @@ public class Car extends Maintenance implements Serializable
     public Car(int yearlyCost, int fuelConsumption, int licenseNum, String model, int year)
     {
         super(yearlyCost, fuelConsumption);
-        this.licenseNum = licenseNum;
-        this.model = model;
-        this.year = year;
-        posX = 0;
-        posY = 0;
+        setLicenseNum(licenseNum);
+        setModel(model);
+        setYear(year);
+        setPosX(0);
+        setPosY(0);
     }
 
-    public int getLicenseNum()
-    {
-        return licenseNum;
-    }
     public void setLicenseNum(int licenseNum)
     {
         this.licenseNum = licenseNum;
     }
-
+    public int getLicenseNum() { return licenseNum; }
     public String getModel() { return model; }
     public void setModel(String model)
     {
@@ -53,4 +50,7 @@ public class Car extends Maintenance implements Serializable
     public void print() {
         System.out.println("["+ getLicenseNum() + "]: " + getModel() + "/" + getYear());
     }
+
+    abstract public void horn();
+    abstract public int getSeats();
 }

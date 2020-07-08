@@ -8,7 +8,7 @@ public class Bus extends Car implements Serializable
     public Bus(int yearlyCost, int fuelConsumption, int licenseNum, String model, int year, int numOfSeat)
     {
         super(yearlyCost, fuelConsumption, licenseNum, model, year);
-        this.numOfSeat = numOfSeat;
+        setNumOfSeat(numOfSeat);
     }
 
     public int getNumOfSeat()
@@ -17,9 +17,24 @@ public class Bus extends Car implements Serializable
     }
     public void setNumOfSeat(int numOfSeat)
     {
-        if(numOfSeat < 0||numOfSeat > 100)
+        // 15 <= x <= 100
+        if(numOfSeat < getMinPassengers() || numOfSeat > 100)
             System.out.println("Invalid NumofSeat");
         else
             this.numOfSeat = numOfSeat;
+    }
+
+    @Override
+    public void horn() {
+        System.out.println("WROLOLO WRLO");
+    }
+
+    @Override
+    public int getSeats() {
+        return getNumOfSeat();
+    }
+
+    public static int getMinPassengers() {
+        return 15;
     }
 }

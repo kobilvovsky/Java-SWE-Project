@@ -3,14 +3,15 @@ import java.io.Serializable;
 
 public class Station implements Serializable
 {
-    public static int counter = 1;
+    public static int counter = 0;
     private int stationId;
     private int posX;
     private int posY;
 
     public Station(int posX, int posY)
     {
-        this.stationId = counter++;
+        this.stationId = ++counter;
+        System.out.println("Station() " + Station.counter );
         this.posX = posX;
         this.posY = posY;
     }
@@ -37,6 +38,8 @@ public class Station implements Serializable
     {
         this.posY = posY;
     }
+
+    public static void setCounter(int c) { counter = c; }
 
     public void print() {
         System.out.println("["+ getStationId() + "]: " + getPosX() + "/" + getPosY());

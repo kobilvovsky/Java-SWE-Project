@@ -10,12 +10,22 @@ import java.io.IOException;
 
 public class InsertController
 {
+    enum ERROR_VALIDATION {
+        EXISTS,
+        NOT_EXISTS,
+        SAME_STATIONS,
+        ROUTE_COMBO_EXITS,
+        WRONG_INPUT_TYPE
+    };
+
+    private ERROR_VALIDATION error;
     private DataController model;
     private InsertMenu view;
 
     public InsertController(DataController model, InsertMenu view){
         this.model = model;
         this.view = view;
+        this.error = ERROR_VALIDATION.EXISTS;
 
         initViewActionListeners();
         view.setSet(model.getSelected().toString());
@@ -25,6 +35,8 @@ public class InsertController
     private void initViewActionListeners() {
         view.initButtons(new InsertController.CloseListener());
     }
+    public void setError(ERROR_VALIDATION e) { error = e; }
+    public ERROR_VALIDATION getError() { return error; }
 
     public class CloseListener implements ActionListener
     {
@@ -45,8 +57,9 @@ public class InsertController
                 if(canContinue)
                     ValidateData(values);
                 else
-                    JOptionPane.showMessageDialog(null, "You have a blank field!",
+                    JOptionPane.showMessageDialog(null, "You can't have blank fields!",
                             "Error Message", JOptionPane.ERROR_MESSAGE);
+
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -59,65 +72,133 @@ public class InsertController
         switch(model.getSelected()) {
             case CAR:
                 //labelTexts = new String[]{"licenseNum", "Model", "Year", "Fuel", "yearlyCost", "Seats"};
-                if(Globals.isInt(new String[]{ values[4], values[3], values[0], values[2], values[5] })) {
-                    Bus newBus = new Bus(Integer.parseInt(values[4]), Integer.parseInt(values[3]), Integer.parseInt(values[0]),
-                            values[1], Integer.parseInt(values[2]), Integer.parseInt(values[5]));
+                //                              0           1       2       3           4           5
+                if(Globals.isInt(new String[]{ values[0], values[2], values[3], values[4], values[5] })) {
+                    if(model.getCarModel().findCar(Integer.parseInt(values[0])) != null) {
+                        setError(ERROR_VALIDATION.EXISTS);
+                        break;
+                    }
 
-                    model.getCarModel().addCar(newBus);
-                    isValid = true;
-                }
+                    if(Integer.parseInt(values[5]) >= Bus.getMinPassengers()) { // is bus
+                        Bus newBus = new Bus(Integer.parseInt(values[4]), Integer.parseInt(values[3]), Integer.parseInt(values[0]),
+                                values[1], Integer.parseInt(values[2]), Integer.parseInt(values[5]));
+
+                        model.getCarModel().addCar(newBus);
+                        isValid = true;
+                    } else { // is minibus
+                        Minibus newMiniBus = new Minibus(Integer.parseInt(values[4]), Integer.parseInt(values[3]), Integer.parseInt(values[0]),
+                                values[1], Integer.parseInt(values[2]), Integer.parseInt(values[5]));
+
+                        model.getCarModel().addCar(newMiniBus);
+                        isValid = true;
+                    }
+                } else
+                    setError(ERROR_VALIDATION.WRONG_INPUT_TYPE);
+
                 break;
 
             case STATION:
                 //labelTexts = new String[]{"stationId", "posX", "posY"};
                 if(Globals.isInt(new String[]{ values[0], values[1] })) {
                     Station newStation = new Station(Integer.parseInt(values[0]), Integer.parseInt(values[1]));
-
                     model.getStationModel().addStation(newStation);
                     isValid = true;
-                }
+                } else
+                    setError(ERROR_VALIDATION.WRONG_INPUT_TYPE);
+
                 break;
 
             case ROUTE:
                 //labelTexts = new String[]{"startStation ID", "endStation ID"};
-                if(model.getStationModel().findStation(Integer.parseInt(values[0])) != null && model.getStationModel().findStation(Integer.parseInt(values[1])) != null) {
-                    if(Globals.isInt(new String[]{ values[0], values[1] })) {
-                        Lineroute newRoute = new Lineroute(model.getStationModel().findStation(Integer.parseInt(values[0])),
-                                model.getStationModel().findStation(Integer.parseInt(values[1])));
-
-                        model.getRouteModel().addRoute(newRoute);
-                        isValid = true;
-                    }
+                if(model.getStationModel().findStation(Integer.parseInt(values[0])) == null) {
+                    setError(ERROR_VALIDATION.NOT_EXISTS);
+                    break;
                 }
+
+                if(model.getStationModel().findStation(Integer.parseInt(values[1])) == null) {
+                    setError(ERROR_VALIDATION.NOT_EXISTS);
+                    break;
+                }
+
+                if(Integer.parseInt(values[0]) == Integer.parseInt(values[1])) {
+                    setError(ERROR_VALIDATION.SAME_STATIONS);
+                    break;
+                }
+
+                if(Globals.isInt(new String[]{ values[0], values[1] }))  {
+                    Lineroute newRoute = new Lineroute(model.getStationModel().findStation(Integer.parseInt(values[0])),
+                            model.getStationModel().findStation(Integer.parseInt(values[1])));
+
+                    model.getRouteModel().addRoute(newRoute);
+                    isValid = true;
+
+                } else
+                    setError(ERROR_VALIDATION.WRONG_INPUT_TYPE);
+
                 break;
 
             case PASSENGER:
                 //labelTexts = new String[]{"Id", "Name", "Sex", "Age", "dateOfSub", "Credit"};
                 if(Globals.isInt(new String[]{ values[5], values[0], values[3] })) {
+                    if(model.getPassengerModel().findPassenger(Integer.parseInt(values[0])) != null) {
+                        setError(ERROR_VALIDATION.EXISTS);
+                        break;
+                    }
+
                     Passenger newPassenger = new Passenger(Integer.parseInt(values[5]), Integer.parseInt(values[0]), values[4],
                             values[1], values[2], Integer.parseInt(values[3]));
 
                     model.getPassengerModel().addPassenger(newPassenger);
                     isValid = true;
-                }
+
+                } else
+                    setError(ERROR_VALIDATION.WRONG_INPUT_TYPE);
+
                 break;
 
             case WORKER:
                 //labelTexts = new String[]{"Id", "Name", "Sex", "Age", "Experience (year)", "Salary"};
                 if(Globals.isInt(new String[]{ values[0], values[3], values[4], values[5] })) {
+                    if(model.getWorkerModel().findWorker(Integer.parseInt(values[0])) != null) {
+                        setError(ERROR_VALIDATION.EXISTS);
+                        break;
+                    }
+
                     Busdriver newWorker = new Busdriver(values[1], Integer.parseInt(values[0]), values[2],
                             Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
 
                     model.getWorkerModel().addWorker(newWorker);
                     isValid = true;
-                }
+
+                } else
+                    setError(ERROR_VALIDATION.WRONG_INPUT_TYPE);
+
                 break;
         }
 
+        if(!isValid) {
+            String e_msg = "ERROR?!";
+            switch (getError()) {
+                case EXISTS:
+                    e_msg = "This id already exists!\nPlease choose a different one";
+                    break;
 
-        if(!isValid)
-            JOptionPane.showMessageDialog(null, "You have entered an invalid value! (String)\nPlease fix your errors!",
+                case NOT_EXISTS:
+                    e_msg = "This station ID does not exists!\nYou must enter a valid Station ID";
+                    break;
+
+                case SAME_STATIONS:
+                    e_msg = "You have entered the same station!\nYou must use 2 different stations";
+                    break;
+
+                case WRONG_INPUT_TYPE:
+                    e_msg = "You have entered an invalid input type!\n Please correct your data";
+                    break;
+            }
+
+            JOptionPane.showMessageDialog(null, e_msg,
                     "Error Message", JOptionPane.ERROR_MESSAGE);
+        }
         else
             JOptionPane.showMessageDialog(null, "You have entered a new " + model.getSelected().toString() + "!",
                     "Success Message", JOptionPane.INFORMATION_MESSAGE);

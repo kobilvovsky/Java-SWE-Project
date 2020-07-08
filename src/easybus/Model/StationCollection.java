@@ -40,6 +40,18 @@ public class StationCollection
 
         return null;
     }
+    public int lastStationId() {
+        Iterator it = getStations().getCollection().iterator();
+        int max = 1;
+
+        while(it.hasNext()) {
+            Station st = (Station) it.next();
+            max = st.getStationId();
+        }
+
+        return max;
+    }
+
     public int getSize() { return getStations().getSize(); }
     public String[] getColumns() { return columns; }
 
@@ -47,6 +59,8 @@ public class StationCollection
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {
             ObjectInputStream ois = new ObjectInputStream(fis);
             stations = (Collection<Station>) ois.readObject();
+            Station.setCounter(lastStationId());
+            System.out.println("loadStations" + Station.counter );
             System.out.println("Loaded: " + getFileName() + ".ser");
             ois.close();
 

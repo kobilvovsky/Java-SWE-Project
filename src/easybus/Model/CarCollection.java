@@ -7,7 +7,7 @@ public class CarCollection
 {
     private static Collection<Car> cars;
     private String fileName;
-    private String[] columns = {"licenseNum", "Model", "Year", "Fuel", "yearlyCost"};//, "Seats"};
+    private String[] columns = {"licenseNum", "Model", "Year", "Fuel", "yearlyCost", "Seats"};//, "Seats"};
 
     public CarCollection(String name) {
         setFileName(name);
@@ -40,6 +40,23 @@ public class CarCollection
 
         return null;
     }
+    public int getCarLicense(int i) {
+        return getCars().getElement(i).getLicenseNum();
+    }
+    public String getCarModelName(int i) {
+        return getCars().getElement(i).getModel();
+    }
+    public int getCarYear(int i) {
+        return getCars().getElement(i).getYear();
+    }
+    public int getCarConsumption(int i) {
+        return getCars().getElement(i).getFuelConsumption();
+    }
+    public int getCarYearlyCost(int i) {
+        return getCars().getElement(i).getYearlyCost();
+    }
+    public int getCarSeats(int i) { return getCars().getElement(i).getSeats(); }
+
     public int getSize() { return getCars().getSize(); }
     public String[] getColumns() { return columns; }
 

@@ -4,7 +4,7 @@ import java.lang.Math;
 
 public class Lineroute implements Serializable
 {
-    public static int counter = 1;
+    public static int counter = 0;
     private int routeIndex;
     private Station startStation;
     private Station endStation;
@@ -12,14 +12,14 @@ public class Lineroute implements Serializable
 
     public Lineroute(Station startStation, Station endStation)
     {
-        this.routeIndex = counter++;
+        this.routeIndex = ++counter;
+        System.out.println("Lineroute() " + Station.counter );
         this.startStation = startStation;
         this.endStation = endStation;
-        getRouteDistance();
+        setRouteDistance();
     }
 
-    public int getRouteIndex()
-    {
+    public int getRouteIndex() {
         return routeIndex;
     }
 
@@ -41,7 +41,7 @@ public class Lineroute implements Serializable
         this.endStation = endStation;
     }
 
-    public void setCounter(int c) { counter = c; }
+    public static void setCounter(int c) { counter = c; }
 
     public float getRouteDistance() { return routDistance; }
     public void setRouteDistance()
