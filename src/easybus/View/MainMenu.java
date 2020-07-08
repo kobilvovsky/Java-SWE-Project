@@ -11,6 +11,8 @@ import javax.swing.*;
 
 public class MainMenu
 {
+    private String title = "[easyBus] Menu (" ;
+
     private JFrame mainFrame;
     private JPanel controlPanel;
 
@@ -22,13 +24,11 @@ public class MainMenu
     private JButton insertButton;
     private JButton viewButton;
 
-    String[] options = { "Vehicles", "Station", "Route", "Passenger", "Worker" };
+    private String[] options = { "Vehicles", "Station", "Route", "Passenger", "Worker" };
 
-    public MainMenu(String title) throws IOException
-    {
+    public MainMenu(String title) throws IOException {
         // WINDOW DEFINITIONS
-        title = "[easyBus] Menu (" + title + ")";
-        mainFrame = new JFrame(title);
+        mainFrame = new JFrame(getTitle());
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();
@@ -39,7 +39,7 @@ public class MainMenu
         picLabel = new JLabel(new ImageIcon(myPicture));
 
         headerLabel = new JLabel("Select Menu:");
-        classList = new JComboBox(options);
+        classList = new JComboBox(getOptionList());
         insertButton = new JButton("Insert");
         viewButton = new JButton("View");
 
@@ -64,46 +64,19 @@ public class MainMenu
         insertButton.setActionCommand("Insert");
         viewButton.setActionCommand("View");
 
-        insertButton.addActionListener(new ButtonClickListener());
-        viewButton.addActionListener(new ButtonClickListener());
-
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
     }
 
-    private class ButtonClickListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) {
-            String command = e.getActionCommand();
-
-            changeDataTo();
-            if(command.equals("Insert"))  {
-                InsertMenu insertMenu = new InsertMenu();
-            } else if(command.equals("View"))  {
-                ViewMenu viewMenu = new ViewMenu();
-            }
-        }
+    public void initButtons(ActionListener al) {
+        insertButton.addActionListener(al);
+        viewButton.addActionListener(al);
     }
-
-    private void changeDataTo() {
-        int index = Arrays.asList(options).indexOf((String) classList.getSelectedItem());
-        switch(index) {
-            case 0:
-                Globals.setCurrentData(Globals.Data.VEHICLE);
-                break;
-            case 1:
-                Globals.setCurrentData(Globals.Data.STATION);
-                break;
-            case 2:
-                Globals.setCurrentData(Globals.Data.ROUTE);
-                break;
-            case 3:
-                Globals.setCurrentData(Globals.Data.PASSENGER);
-                break;
-            case 4:
-                Globals.setCurrentData(Globals.Data.WORKER);
-                break;
-        }
+    public String getTitle() { return title; }
+    public String[] getOptionList() { return options; }
+    public void setTitle(String str) {
+        title = str + " )";
     }
+    public JComboBox getOptionsList() { return classList; }
 }

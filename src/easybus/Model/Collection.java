@@ -1,4 +1,4 @@
-package easybus;
+package easybus.Model;
 import easybus.Model.*;
 
 import java.io.Serializable;
@@ -20,6 +20,7 @@ public class Collection<T> implements Serializable
     public int indexOf(T t) { return collection.indexOf(t); }
     public T getElement(int i) { return collection.get(i); }
 
+    public List<T> getCollection() { return collection; }
     public Car getCarById(int id) {
         Iterator it = collection.iterator();
 
