@@ -19,7 +19,7 @@ public class Minibus extends easybus.Car
     {
         if(numOfSeat<0||numOfSeat>50)
         {
-            System.out.println("Invalid NumofSeat");
+            System.out.println("Invalid Minibus  NumofSeat");
             System.out.println("Enter NumofSeat");
             //לקבל מספר כסאות תקין ולהשוות לנאמאופסיט
         }

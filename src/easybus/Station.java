@@ -6,9 +6,8 @@ public class Station
     int posX;
     int posY;
 
-    public Station(int stationId, int posX, int posY)
+    public Station( int posX, int posY)
     {
-        this.setStationId(stationId);
         this.posX = posX;
         this.posY = posY;
     }

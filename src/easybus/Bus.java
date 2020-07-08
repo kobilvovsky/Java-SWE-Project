@@ -18,7 +18,7 @@ public class Bus extends Car
     {
         if(numOfSeat<0||numOfSeat>100)
         {
-            System.out.println("Invalid NumofSeat");
+            System.out.println("Invalid Bus NumofSeat");
             System.out.println("Enter NumofSeat");
             //לקבל מספר כסאות תקין ולהשוות לנאמאופסיט
         }

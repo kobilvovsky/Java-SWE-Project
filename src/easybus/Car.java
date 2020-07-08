@@ -1,6 +1,6 @@
 package easybus;
 
-public class Car extends Maintenance
+public abstract class  Car extends Maintenance
 {
     int licenseNum;
     String model;
@@ -55,7 +55,7 @@ public class Car extends Maintenance
     }
     public void setYear(int year)
     {
-        if(year<0 ||year>30)
+        if(year<1980 ||year>2021)
         {
             System.out.println("Invalid Year");
             System.out.println("Enter Year");
@@ -94,5 +94,6 @@ public class Car extends Maintenance
 
         return true;
     }
+    public abstract int getNumOfSeat();
 
 }
