@@ -24,7 +24,7 @@ public class InsertMenu
     public InsertMenu()
     {
         // WINDOW DEFINITIONS
-        mainFrame = new JFrame("[easyBus] Insert");
+        mainFrame = new JFrame("Insert Menu");
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();

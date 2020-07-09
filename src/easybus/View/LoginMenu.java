@@ -25,7 +25,7 @@ public class LoginMenu extends JFrame {
     private LoginController loginController;
 
     public LoginMenu() {
-        mainFrame = new JFrame("[easyBus] Login");
+        mainFrame = new JFrame("Login Menu");
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();

@@ -10,6 +10,8 @@ import java.io.IOException;
 
 public class ViewController
 {
+    int MAX_TEXT_SIZE = 32;
+
     private DataController model;
     private ViewMenu view;
 
@@ -108,7 +110,7 @@ public class ViewController
         switch(model.getSelected()) {
             case CAR:
                 header = model.getCarModel().getColumns();
-                data = new String[model.getCarModel().getSize()][24];
+                data = new String[model.getCarModel().getSize()][MAX_TEXT_SIZE];
                 for(int i = 0; i < model.getCarModel().getSize(); i++) {
                     data[i][j++] = Integer.toString(model.getCarModel().getCarLicense(i));
                     data[i][j++] = model.getCarModel().getCarModelName(i);
@@ -121,7 +123,7 @@ public class ViewController
                 break;
             case STATION:
                 header = model.getStationModel().getColumns();
-                data = new String[model.getStationModel().getSize()][24];
+                data = new String[model.getStationModel().getSize()][MAX_TEXT_SIZE];
                 for(int i = 0; i < model.getStationModel().getSize(); i++) {
                     data[i][j++] = Integer.toString(model.getStationModel().getStations().getElement(i).getStationId());
                     data[i][j++] = Integer.toString(model.getStationModel().getStations().getElement(i).getPosX());
@@ -131,7 +133,7 @@ public class ViewController
                 break;
             case ROUTE:
                 header = model.getRouteModel().getColumns();
-                data = new String[model.getRouteModel().getSize()][24];
+                data = new String[model.getRouteModel().getSize()][MAX_TEXT_SIZE];
                 for(int i = 0; i < model.getRouteModel().getSize(); i++) {
                     data[i][j++] = Integer.toString(model.getRouteModel().getRoutes().getElement(i).getRouteIndex());
                     data[i][j++] = Integer.toString(model.getRouteModel().getRoutes().getElement(i).getStartStation().getStationId());
@@ -142,7 +144,7 @@ public class ViewController
                 break;
             case PASSENGER:
                 header = model.getPassengerModel().getColumns();
-                data = new String[model.getPassengerModel().getSize()][24];
+                data = new String[model.getPassengerModel().getSize()][MAX_TEXT_SIZE];
                 for(int i = 0; i < model.getPassengerModel().getSize(); i++) {
                     data[i][j++] = Integer.toString(model.getPassengerModel().getPassengers().getElement(i).getId());
                     data[i][j++] = model.getPassengerModel().getPassengers().getElement(i).getName();
@@ -155,7 +157,7 @@ public class ViewController
                 break;
             case WORKER:
                 header = model.getWorkerModel().getColumns();
-                data = new String[model.getWorkerModel().getSize()][24];
+                data = new String[model.getWorkerModel().getSize()][MAX_TEXT_SIZE];
                 for(int i = 0; i < model.getWorkerModel().getSize(); i++) {
                     data[i][j++] = Integer.toString(model.getWorkerModel().getWorkers().getElement(i).getId());
                     data[i][j++] = model.getWorkerModel().getWorkers().getElement(i).getName();

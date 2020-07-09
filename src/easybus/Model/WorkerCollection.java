@@ -7,7 +7,7 @@ public class WorkerCollection implements Base
 {
     private static Collection<Busdriver> workers;
     private String fileName;
-    private String[] columns = {"Id", "Name", "Sex", "Age", "Experience (year)", "Salary", "Warnings"};
+    private String[] columns = {"Id", "Name", "Sex", "Age", "Experience (y)", "Salary", "Warnings"};
 
     public WorkerCollection(String name) {
         setFileName(name);

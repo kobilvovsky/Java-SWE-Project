@@ -12,6 +12,7 @@ public class InsertController
 {
     enum ERROR_VALIDATION {
         EXISTS,
+        WRONG_LICENSE,
         NOT_EXISTS,
         SAME_STATIONS,
         ROUTE_COMBO_EXITS,
@@ -76,6 +77,11 @@ public class InsertController
                 if(Globals.isInt(new String[]{ values[0], values[2], values[3], values[4], values[5] })) {
                     if(model.getCarModel().findCar(Integer.parseInt(values[0])) != null) {
                         setError(ERROR_VALIDATION.EXISTS);
+                        break;
+                    }
+
+                    if(!model.getCarModel().isValidLicense(values[0])) {
+                        setError(ERROR_VALIDATION.WRONG_LICENSE);
                         break;
                     }
 
@@ -183,6 +189,10 @@ public class InsertController
                     e_msg = "This id already exists!\nPlease choose a different one";
                     break;
 
+                case WRONG_LICENSE:
+                    e_msg = "You have entered an invalid license!\n License number is within 6 or 7 digits";
+                    break;
+
                 case NOT_EXISTS:
                     e_msg = "This station ID does not exists!\nYou must enter a valid Station ID";
                     break;
@@ -205,30 +215,30 @@ public class InsertController
     }
 
     private void prepareInsertMenu() {
-        int x_label = (Globals.WINDOW_WIDTH/3)-50+90; // 140
-        int x_input = (Globals.WINDOW_WIDTH/3)+50+90; // 240
+        int x_label = (Globals.WINDOW_WIDTH/3)-40;
+        int x_input = (Globals.WINDOW_WIDTH/3)+140;
         int y = 50;
         String labelTexts[] = new String[0];
 
         switch(model.getSelected()) {
             case CAR:
-                labelTexts = new String[]{"licenseNum", "Model", "Year", "Fuel", "yearlyCost", "Seats"};
+                labelTexts = model.getCarModel().getColumns();
                 break;
 
             case STATION:
-                labelTexts = new String[]{"posX", "posY"};
+                labelTexts = model.getStationModel().getColumns();
                 break;
 
             case ROUTE:
-                labelTexts = new String[]{"startStation ID", "endStation ID"};
+                labelTexts = model.getRouteModel().getColumns();
                 break;
 
             case PASSENGER:
-                labelTexts = new String[]{"Id", "Name", "Sex", "Age", "dateOfSub", "Credit"};
+                labelTexts = model.getPassengerModel().getColumns();
                 break;
 
             case WORKER:
-                labelTexts = new String[]{"Id", "Name", "Sex", "Age", "Experience (year)", "Salary"};
+                labelTexts = model.getWorkerModel().getColumns();
                 break;
         }
 

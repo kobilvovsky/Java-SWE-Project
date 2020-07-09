@@ -7,7 +7,7 @@ public class CarCollection implements Base
 {
     private static Collection<Car> cars;
     private String fileName;
-    private String[] columns = {"licenseNum", "Model", "Year", "Fuel", "yearlyCost", "Seats"};//, "Seats"};
+    private String[] columns = {"License Num", "Model", "Year", "L Consumption", "Yealy Cost", "Seats"};
 
     public CarCollection(String name) {
         setFileName(name);
@@ -42,6 +42,13 @@ public class CarCollection implements Base
     }
     public int getCarLicense(int i) {
         return getCars().getElement(i).getLicenseNum();
+    }
+    public boolean isValidLicense(String str) {
+        int length = str.length();
+        if(length >= 6 && length <= 7)
+            return true;
+
+        return false;
     }
     public String getCarModelName(int i) {
         return getCars().getElement(i).getModel();

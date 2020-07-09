@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class MainMenu
 {
-    private String title = "[easyBus] Menu (" ;
+    private String title = "Main Menu" ;
 
     private JFrame mainFrame;
     private JPanel controlPanel;

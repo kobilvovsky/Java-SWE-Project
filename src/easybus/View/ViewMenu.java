@@ -20,7 +20,7 @@ public class ViewMenu
     public ViewMenu()
     {
         // WINDOW DEFINITIONS
-        mainFrame = new JFrame("[easyBus] View");
+        mainFrame = new JFrame("View");
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();

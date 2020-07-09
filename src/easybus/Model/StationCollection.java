@@ -7,7 +7,7 @@ public class StationCollection implements Base
 {
     private static Collection<Station> stations;
     private String fileName;
-    private String[] columns = {"stationId", "posX", "posY"};
+    private String[] columns = {"stationId", "Point X", "Point Y"};
 
     public StationCollection(String name) {
         setFileName(name);

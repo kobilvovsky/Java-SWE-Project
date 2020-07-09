@@ -7,7 +7,7 @@ public class PassengerCollection implements Base
 {
     private static Collection<Passenger> passengers;
     private String fileName;
-    private String[] columns = {"Id", "Name", "Sex", "Age", "dateOfSub", "Credit"};
+    private String[] columns = {"Id", "Name", "Sex", "Age", "Date Of Sub", "Credit"};
 
     public PassengerCollection(String name) {
         setFileName(name);
