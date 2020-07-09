@@ -13,7 +13,7 @@ public class MainMenu
     private JFrame mainFrame;
     private JPanel controlPanel;
 
-    JLabel picLabel;
+    private JLabel picLabel;
 
     private JComboBox classList;
     private JLabel headerLabel;
@@ -28,10 +28,10 @@ public class MainMenu
         controlPanel = new JPanel();
 
         mainFrame.getContentPane();
-        mainFrame.setSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        mainFrame.setSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT/2);
 
         // COMPONENETS INIT
-        picLabel = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/logo.png")));
+        picLabel = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/logov2.png")));
 
         headerLabel = new JLabel("Select Menu:");
         classList = new JComboBox(getOptionList());

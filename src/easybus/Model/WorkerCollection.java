@@ -7,7 +7,8 @@ public class WorkerCollection implements Base
 {
     private static Collection<Busdriver> workers;
     private String fileName;
-    private String[] columns = {"Id", "Name", "Sex", "Age", "Experience (y)", "Salary", "Warnings"};
+    private String[] insertColumns = {"Id", "Name", "Sex", "Age", "Experience (y)", "Salary", "Warnings"};
+    private String[] viewColumns = insertColumns;
 
     public WorkerCollection(String name) {
         setFileName(name);
@@ -41,7 +42,8 @@ public class WorkerCollection implements Base
         return null;
     }
     public int getSize() { return getWorkers().getSize(); }
-    public String[] getColumns() { return columns; }
+    public String[] getInsertColumns() { return insertColumns; }
+    public String[] getViewColumns() { return viewColumns; }
 
     public boolean loadWorkers() {
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {

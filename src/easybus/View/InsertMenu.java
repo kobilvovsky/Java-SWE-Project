@@ -36,7 +36,7 @@ public class InsertMenu
         saveButton = new JButton("Save");
 
         // COMPONENTS TO PANEL
-        headerLabel.setBounds((Globals.WINDOW_WIDTH/3)+50+120, 50, 150, 35);
+        headerLabel.setBounds((Globals.WINDOW_WIDTH/3)+170, 50, 150, 35);
 
         mainFrame.add(controlPanel);
         controlPanel.add(saveButton);

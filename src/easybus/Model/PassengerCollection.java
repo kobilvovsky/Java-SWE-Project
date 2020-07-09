@@ -7,7 +7,8 @@ public class PassengerCollection implements Base
 {
     private static Collection<Passenger> passengers;
     private String fileName;
-    private String[] columns = {"Id", "Name", "Sex", "Age", "Date Of Sub", "Credit"};
+    private String[] insertColumns = {"Id", "Name", "Sex", "Age", "Date Of Sub", "Credit"};
+    private String[] viewColumns = insertColumns;
 
     public PassengerCollection(String name) {
         setFileName(name);
@@ -41,7 +42,8 @@ public class PassengerCollection implements Base
         return null;
     }
     public int getSize() { return getPassengers().getSize(); }
-    public String[] getColumns() { return columns; }
+    public String[] getInsertColumns() { return insertColumns; }
+    public String[] getViewColumns() { return viewColumns; }
 
     public boolean loadPassengers() {
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {

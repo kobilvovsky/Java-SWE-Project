@@ -1,4 +1,4 @@
 kobi,123456
 erez,54321
 shmoel,99999
-a,a
+admin,admin

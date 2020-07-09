@@ -222,23 +222,23 @@ public class InsertController
 
         switch(model.getSelected()) {
             case CAR:
-                labelTexts = model.getCarModel().getColumns();
+                labelTexts = model.getCarModel().getInsertColumns();
                 break;
 
             case STATION:
-                labelTexts = model.getStationModel().getColumns();
+                labelTexts = model.getStationModel().getInsertColumns();
                 break;
 
             case ROUTE:
-                labelTexts = model.getRouteModel().getColumns();
+                labelTexts = model.getRouteModel().getInsertColumns();
                 break;
 
             case PASSENGER:
-                labelTexts = model.getPassengerModel().getColumns();
+                labelTexts = model.getPassengerModel().getInsertColumns();
                 break;
 
             case WORKER:
-                labelTexts = model.getWorkerModel().getColumns();
+                labelTexts = model.getWorkerModel().getInsertColumns();
                 break;
         }
 

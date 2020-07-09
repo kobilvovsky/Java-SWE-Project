@@ -7,7 +7,8 @@ public class CarCollection implements Base
 {
     private static Collection<Car> cars;
     private String fileName;
-    private String[] columns = {"License Num", "Model", "Year", "L Consumption", "Yealy Cost", "Seats"};
+    private String[] insertColumns = {"License Num", "Model", "Year", "Fuel KM per L", "Yearly Cost", "Seats"};
+    private String[] viewColumns = insertColumns;
 
     public CarCollection(String name) {
         setFileName(name);
@@ -45,7 +46,7 @@ public class CarCollection implements Base
     }
     public boolean isValidLicense(String str) {
         int length = str.length();
-        if(length >= 6 && length <= 7)
+        if(length >= 7 && length <= 8)
             return true;
 
         return false;
@@ -65,7 +66,8 @@ public class CarCollection implements Base
     public int getCarSeats(int i) { return getCars().getElement(i).getSeats(); }
 
     public int getSize() { return getCars().getSize(); }
-    public String[] getColumns() { return columns; }
+    public String[] getInsertColumns() { return insertColumns; }
+    public String[] getViewColumns() { return viewColumns; }
 
     public boolean loadCars() {
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {

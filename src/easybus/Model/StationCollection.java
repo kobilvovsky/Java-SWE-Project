@@ -7,7 +7,8 @@ public class StationCollection implements Base
 {
     private static Collection<Station> stations;
     private String fileName;
-    private String[] columns = {"stationId", "Point X", "Point Y"};
+    private String[] insertColumns = {"Point X", "Point Y"};
+    private String[] viewColumns = {"Station ID", "Point X", "Point Y"};
 
     public StationCollection(String name) {
         setFileName(name);
@@ -53,7 +54,8 @@ public class StationCollection implements Base
     }
 
     public int getSize() { return getStations().getSize(); }
-    public String[] getColumns() { return columns; }
+    public String[] getInsertColumns() { return insertColumns; }
+    public String[] getViewColumns() { return viewColumns; }
 
     public boolean loadStations() {
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {

@@ -7,7 +7,8 @@ public class RouteCollection implements Base
 {
     private static Collection<Lineroute> routes;
     private String fileName;
-    private String[] columns = {"RouteId", "startStation ID", "endStation ID", "Distance"};
+    private String[] insertColumns = {"startStation ID", "endStation ID"};
+    private String[] viewColumns = {"Route ID", "startStation ID", "endStation ID", "Distance"};
 
     public RouteCollection(String name) {
         setFileName(name);
@@ -53,7 +54,8 @@ public class RouteCollection implements Base
         return max;
     }
     public int getSize() { return getRoutes().getSize(); }
-    public String[] getColumns() { return columns; }
+    public String[] getInsertColumns() { return insertColumns; }
+    public String[] getViewColumns() { return viewColumns; }
 
     public boolean loadRoutes() {
         try (FileInputStream fis = new FileInputStream(getFileName() + ".ser")) {

@@ -5,6 +5,7 @@ import easybus.Controller.LoginController;
 import easybus.Controller.MainMenuController;
 import easybus.Model.Globals;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -13,6 +14,9 @@ public class LoginMenu extends JFrame {
 
     private JFrame mainFrame;
     private JPanel controlPanel;
+
+    private JLabel picLabel;
+    private JLabel largePicture;
 
     private JLabel userLabel;
     private JLabel passwordLabel;
@@ -34,6 +38,9 @@ public class LoginMenu extends JFrame {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         controlPanel.setLayout(null);
 
+        picLabel = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/logov2.png")));
+        largePicture = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/bus.jpg")));
+
         userLabel = new JLabel("Username");
         passwordLabel = new JLabel("Password");
         userTextField = new JTextField();
@@ -42,15 +49,19 @@ public class LoginMenu extends JFrame {
         resetButton = new JButton("Reset");
         showPassword = new JCheckBox("Show Password");
 
-        userLabel.setBounds(50, 150, 100, 30);
-        passwordLabel.setBounds(50, 220, 100, 30);
-        userTextField.setBounds(150, 150, 150, 30);
-        passwordField.setBounds(150, 220, 150, 30);
-        showPassword.setBounds(150, 250, 150, 30);
-        loginButton.setBounds(50, 300, 100, 30);
-        resetButton.setBounds(200, 300, 100, 30);
+        picLabel.setBounds(50, 50, 200, 200);
+        userLabel.setBounds((Globals.WINDOW_WIDTH/3)+40, 100, 90, 35);
+        passwordLabel.setBounds((Globals.WINDOW_WIDTH/3)+40, 150, 90, 35);
+        userTextField.setBounds(Globals.WINDOW_WIDTH/3+140, 100, 250, 35);
+        passwordField.setBounds(Globals.WINDOW_WIDTH/3+140, 150, 250, 35);
+        showPassword.setBounds(Globals.WINDOW_WIDTH/3+135, 185, 150, 30);
+        loginButton.setBounds(Globals.WINDOW_WIDTH/3+140, 235, 100, 30);
+        resetButton.setBounds(Globals.WINDOW_WIDTH/3+240, 235, 100, 30);
+        largePicture.setBounds(50, 330, 700, 200);
 
         mainFrame.add(controlPanel);
+        controlPanel.add(picLabel);
+        controlPanel.add(largePicture);
         controlPanel.add(userLabel);
         controlPanel.add(passwordLabel);
         controlPanel.add(userTextField);
