@@ -190,7 +190,7 @@ public class InsertController
                     break;
 
                 case WRONG_LICENSE:
-                    e_msg = "You have entered an invalid license!\n License number is within 6 or 7 digits";
+                    e_msg = "You have entered an invalid license!\n License number is within 7 or 8 digits";
                     break;
 
                 case NOT_EXISTS:
