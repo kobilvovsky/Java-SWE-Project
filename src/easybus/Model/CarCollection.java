@@ -93,9 +93,4 @@ public class CarCollection implements Base
 
         return false;
     }
-
-    @Override
-    public void draw() {
-        System.out.println("CarCollection");
-    }
 }

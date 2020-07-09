@@ -76,9 +76,4 @@ public class PassengerCollection implements Base
 
         return false;
     }
-
-    @Override
-    public void draw() {
-        System.out.println("PassengerCollection");
-    }
 }

@@ -90,9 +90,4 @@ public class RouteCollection implements Base
 
         return false;
     }
-
-    @Override
-    public void draw() {
-        System.out.println("RouteCollection");
-    }
 }

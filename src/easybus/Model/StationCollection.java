@@ -90,9 +90,4 @@ public class StationCollection implements Base
 
         return false;
     }
-
-    @Override
-    public void draw() {
-        System.out.println("StationCollection");
-    }
 }

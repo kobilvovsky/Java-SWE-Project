@@ -1,12 +1,9 @@
 package easybus.View;
 
 import easybus.Model.Globals;
+
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class MainMenu
@@ -16,7 +13,6 @@ public class MainMenu
     private JFrame mainFrame;
     private JPanel controlPanel;
 
-    BufferedImage myPicture;
     JLabel picLabel;
 
     private JComboBox classList;
@@ -35,8 +31,7 @@ public class MainMenu
         mainFrame.setSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
         // COMPONENETS INIT
-        myPicture = ImageIO.read(new File("C:\\Users\\Erez\\Pictures\\logo.png"));
-        picLabel = new JLabel(new ImageIcon(myPicture));
+        picLabel = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/logo.png")));
 
         headerLabel = new JLabel("Select Menu:");
         classList = new JComboBox(getOptionList());
